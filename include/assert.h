@@ -26,6 +26,12 @@
 #include <compiler.h>
 #include <debug.h>
 
+#if defined(DEBUG)
+#define DEBUGLEVEL DEBUG
+#else
+#define DEBUGLEVEL 2
+#endif
+
 #define ASSERT(x) \
 	do { if (unlikely(!(x))) { panic("ASSERT FAILED at (%s:%d): %s\n", __FILE__, __LINE__, #x); } } while (0)
 #define assert(x) ASSERT(x)
