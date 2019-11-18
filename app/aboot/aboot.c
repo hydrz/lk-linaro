@@ -1287,7 +1287,7 @@ int boot_linux_from_mmc(void)
 
 	/* Move kernel, ramdisk and device tree to correct address */
 	memmove((void*) hdr->kernel_addr, kernel_start_addr, kernel_size);
-	memmove((void*) hdr->ramdisk_addr, (char *)(image_addr + page_size + kernel_actual), hdr->ramdisk_size);
+	hdr->ramdisk_addr = (char *)(image_addr + page_size + kernel_actual);
 
 	#if DEVICE_TREE
 	if(hdr->dt_size) {
@@ -1544,7 +1544,7 @@ int boot_linux_from_flash(void)
 
 		/* Move kernel and ramdisk to correct address */
 		memmove((void*) hdr->kernel_addr, (char*) (image_addr + page_size), hdr->kernel_size);
-		memmove((void*) hdr->ramdisk_addr, (char*) (image_addr + page_size + kernel_actual), hdr->ramdisk_size);
+		hdr->ramdisk_addr = (char*) (image_addr + page_size + kernel_actual);
 #if DEVICE_TREE
 		/* Validate and Read device device tree in the "tags_add */
 		if (check_aboot_addr_range_overlap(hdr->tags_addr, dt_entry.size))
@@ -2365,7 +2365,7 @@ void cmd_boot(const char *arg, void *data, unsigned sz)
 #endif
 
 	/* Load ramdisk & kernel */
-	memmove((void*) hdr->ramdisk_addr, ptr + page_size + kernel_actual, hdr->ramdisk_size);
+	hdr->ramdisk_addr = (char *) (ptr + page_size + kernel_actual);
 	memmove((void*) hdr->kernel_addr, (char*) (kernel_start_addr), kernel_size);
 
 #if DEVICE_TREE
