@@ -692,7 +692,7 @@ unsigned int usb_phy_bcr();
 #define DDR_START                    platform_get_ddr_start()
 #define ABOOT_FORCE_KERNEL_ADDR      (DDR_START + 0x8000)
 #define ABOOT_FORCE_RAMDISK_ADDR     (DDR_START + 0x4000000)
-#define ABOOT_FORCE_TAGS_ADDR        (DDR_START + 0x3E00000)
+#define ABOOT_FORCE_TAGS_ADDR        (DDR_START + 0x5600000)
 #define ABOOT_FORCE_KERNEL64_ADDR    (DDR_START + 0x80000)
 
 #endif
